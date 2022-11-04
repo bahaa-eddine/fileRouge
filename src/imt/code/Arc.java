@@ -1,6 +1,6 @@
 package imt.code;
 
-public class Arc {
+public abstract class Arc {
 
 	private Integer weight = 1;
 	private Place place;
@@ -42,17 +42,7 @@ public class Arc {
 		this.transition = transition;
 	}
 
-	public void fire() {
-		if (isFireable() && isActive() )
-			getPlace().setTokens(getPlace().getTokens() - getWeight());
-	}
-
-	public boolean isFireable() {
-		return getWeight() <= getPlace().getTokens() ? true : false;
-	}
-	
-	private boolean isActive() {
-		return (getPlace().getTokens() == 0 ? false : true);
-	}
+	public abstract void fire();
+	public abstract boolean isFireable();
 
 }

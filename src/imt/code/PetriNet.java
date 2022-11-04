@@ -9,6 +9,11 @@ public class PetriNet implements IPetriNet {
 	private List<Arc> listArc = new ArrayList<>();
 	private List<Transition> listTransition = new ArrayList<>();
 	
+	public PetriNet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public PetriNet(List<Place> listPlace, List<Arc> listArc, List<Transition> listTransition) {
 		super();
 		this.listPlace = listPlace;

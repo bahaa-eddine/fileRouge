@@ -1,30 +1,37 @@
 package imt.code;
 
 public class ArcOutTransition extends Arc {
-
-	private Transition source;
-	private Place destination;
+	
+	private int nodes;
 
 	public ArcOutTransition(Place destination, Transition source, Integer weight) {
 		super(destination, source, weight);
-		this.source = source;
-		this.destination = destination;
+		this.setPlace(destination);
+		this.setTransition(source);
 	}
 
-	public Transition getSource() {
-		return source;
+	@Override
+	public void fire() {
+		if(isFireable()) {
+			getPlace().setTokens(getPlace().getTokens() + getWeight());
+			getTransition().getIncoming().forEach(arc -> {
+				if(arc.getPlace().getTokens() <= getWeight()) {
+					arc.getPlace().setTokens(0);
+				} else {
+					arc.getPlace().setTokens(arc.getPlace().getTokens() - getWeight());
+				}
+			});
+		}
+		
 	}
 
-	public void setSource(Transition source) {
-		this.source = source;
-	}
-
-	public Place getDestination() {
-		return destination;
-	}
-
-	public void setDestination(Place destination) {
-		this.destination = destination;
+	@Override
+	public boolean isFireable() {
+		nodes = 0;
+		getTransition().getIncoming().forEach(arc -> {
+			nodes += arc.getPlace().getTokens();
+		});
+		return (nodes <= getWeight()) ? true : false;
 	}	
 
 }

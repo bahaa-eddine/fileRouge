@@ -2,30 +2,27 @@ package imt.code;
 
 public class ArcInTransition extends Arc {
 
-	private Place source;
-	private Transition destination;
-
 	public ArcInTransition(Place source, Transition destination, Integer weight) {
 		super(source, destination, weight);
-		this.source = source;
-		this.destination = destination;
+		this.setPlace(source);
+		this.setTransition(destination);
 	}
 
-	public Place getSource() {
-		return source;
+	@Override
+	public void fire() {
+		if (isFireable()) {
+			getPlace().setTokens(getPlace().getTokens() - getWeight());
+			getTransition().getOutgoing().forEach(arc -> {
+				arc.getPlace().setTokens(getWeight());
+			});
+		}
 	}
 
-	public void setSource(Place source) {
-		this.source = source;
+	@Override
+	public boolean isFireable() {
+		return (getWeight() <= getPlace().getTokens()) ? true : false;
 	}
-
-	public Transition getDestination() {
-		return destination;
-	}
-
-	public void setDestination(Transition destination) {
-		this.destination = destination;
-	}
+	
 	
 	
 
