@@ -11,9 +11,11 @@ public class ArcInTransition extends Arc {
 	@Override
 	public void fire() {
 		if (isFireable()) {
+			setActive(true);
 			getPlace().setTokens(getPlace().getTokens() - getWeight());
 			getTransition().getOutgoing().forEach(arc -> {
-				arc.getPlace().setTokens(getWeight());
+				if (!arc.isActive())
+					arc.getPlace().setTokens(arc.getPlace().getTokens() + getWeight());
 			});
 		}
 	}

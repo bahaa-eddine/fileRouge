@@ -12,18 +12,24 @@ public class Transition {
 		super();
 	}
 
-    public void fire(Type type) {
-    	if(type == Type.IN) {
+    public void fire() {
     		for (ArcInTransition arc : incoming) {
     			arc.fire();
     		}
-    	}
-    	if(type == Type.OUT) {
     		for (ArcOutTransition arc : outgoing) {
     			arc.fire();
     		}
-    	}
+    		resetActivation();
     }
+
+	private void resetActivation() {
+		for(ArcInTransition inTransition: incoming) {
+			inTransition.setActive(false);
+		}
+		for(ArcOutTransition inTransition: outgoing) {
+			inTransition.setActive(false);
+		}
+	}
 
 	public List<ArcInTransition> getIncoming() {
 		return incoming;

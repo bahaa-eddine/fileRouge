@@ -41,28 +41,28 @@ public class Main {
 		System.out.println(place_3);
 		
 		System.out.println("Tr : 1");
-		transition_1.fire(Type.IN);
+		transition_1.fire();
 		
 		System.out.println(place_1);
 		System.out.println(place_2);
 		System.out.println(place_3);
 		
 		System.out.println("Tr : 2");
-		transition_2.fire(Type.OUT);
+		transition_2.fire();
 
 		System.out.println(place_1);
 		System.out.println(place_2);
 		System.out.println(place_3);
 		
 		System.out.println("Tr : 1");
-		transition_1.fire(Type.IN);
+		transition_1.fire();
 		
 		System.out.println(place_1);
 		System.out.println(place_2);
 		System.out.println(place_3);
 		
 		System.out.println("Tr : 2");
-		transition_2.fire(Type.OUT);
+		transition_2.fire();
 
 		System.out.println(place_1);
 		System.out.println(place_2);

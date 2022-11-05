@@ -5,6 +5,7 @@ public abstract class Arc {
 	private Integer weight = 1;
 	private Place place;
 	private Transition transition;
+	private boolean active = false;
 
 	public Arc() {
 		super();
@@ -42,7 +43,15 @@ public abstract class Arc {
 		this.transition = transition;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public abstract void fire();
 	public abstract boolean isFireable();
-
+	
 }

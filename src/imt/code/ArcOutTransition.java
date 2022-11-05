@@ -13,12 +13,15 @@ public class ArcOutTransition extends Arc {
 	@Override
 	public void fire() {
 		if(isFireable()) {
+			setActive(true);
 			getPlace().setTokens(getPlace().getTokens() + getWeight());
 			getTransition().getIncoming().forEach(arc -> {
-				if(arc.getPlace().getTokens() <= getWeight()) {
-					arc.getPlace().setTokens(0);
-				} else {
-					arc.getPlace().setTokens(arc.getPlace().getTokens() - getWeight());
+				if(!arc.isActive()) {
+					if(arc.getPlace().getTokens() <= getWeight()) {
+						arc.getPlace().setTokens(0);
+					} else {
+						arc.getPlace().setTokens(arc.getPlace().getTokens() - arc.getWeight());
+					}
 				}
 			});
 		}
@@ -29,9 +32,10 @@ public class ArcOutTransition extends Arc {
 	public boolean isFireable() {
 		nodes = 0;
 		getTransition().getIncoming().forEach(arc -> {
-			nodes += arc.getPlace().getTokens();
+			if(!arc.isActive())
+				nodes += arc.getPlace().getTokens();
 		});
-		return (nodes <= getWeight()) ? true : false;
+		return (nodes <= getWeight() && nodes != 0) ? true : false;
 	}	
 
 }
