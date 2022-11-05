@@ -35,7 +35,7 @@ public class Main {
 		transition_2.getOutgoing().add(arc_place_1_transition_2);
 		transition_2.getIncoming().add(arc_transition_2_place_2);
 		transition_2.getIncoming().add(arc_transition_2_place_3);
-
+		
 		System.out.println(place_1);
 		System.out.println(place_2);
 		System.out.println(place_3);

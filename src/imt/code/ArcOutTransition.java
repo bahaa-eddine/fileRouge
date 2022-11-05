@@ -1,7 +1,7 @@
 package imt.code;
 
 public class ArcOutTransition extends Arc {
-	
+
 	private int nodes;
 
 	public ArcOutTransition(Place destination, Transition source, Integer weight) {
@@ -12,12 +12,12 @@ public class ArcOutTransition extends Arc {
 
 	@Override
 	public void fire() {
-		if(isFireable()) {
+		if (isFireable()) {
 			setActive(true);
 			getPlace().setTokens(getPlace().getTokens() + getWeight());
 			getTransition().getIncoming().forEach(arc -> {
-				if(!arc.isActive()) {
-					if(arc.getPlace().getTokens() <= getWeight()) {
+				if (!arc.isActive()) {
+					if (arc.getPlace().getTokens() <= getWeight()) {
 						arc.getPlace().setTokens(0);
 					} else {
 						arc.getPlace().setTokens(arc.getPlace().getTokens() - arc.getWeight());
@@ -25,17 +25,19 @@ public class ArcOutTransition extends Arc {
 				}
 			});
 		}
-		
+
 	}
 
 	@Override
 	public boolean isFireable() {
 		nodes = 0;
 		getTransition().getIncoming().forEach(arc -> {
-			if(!arc.isActive())
+			if (arc.getPlace().getTokens() == 0)
+				arc.setActive(true);
+			if (!arc.isActive())
 				nodes += arc.getPlace().getTokens();
 		});
 		return (nodes <= getWeight() && nodes != 0) ? true : false;
-	}	
+	}
 
 }

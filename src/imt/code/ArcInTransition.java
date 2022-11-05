@@ -22,7 +22,7 @@ public class ArcInTransition extends Arc {
 
 	@Override
 	public boolean isFireable() {
-		return (getWeight() <= getPlace().getTokens()) ? true : false;
+		return (getWeight() <= getPlace().getTokens() && getPlace().getTokens()!= 0) ? true : false;
 	}
 	
 	
