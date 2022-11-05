@@ -6,4 +6,6 @@
  *
  */
 module FileRouge {
+	requires junit;
+
 }
